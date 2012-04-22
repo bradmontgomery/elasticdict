@@ -67,5 +67,5 @@ Look at the source; There's obviously not much here at the moment. Right now the
     * support for all of the `dict` methods (not everything works as expected here)
     * Search! Elasticsearch is for... search. Maybe this thing needs a ``search`` method?
 
-Other ideas? Reach out on twitter (`@bkmontgomery <http://twitter.com/bkmontgomery`_) or send me a message!
+Other ideas? Reach out on twitter (`@bkmontgomery <http://twitter.com/bkmontgomery>`_) or send me a message!
 
