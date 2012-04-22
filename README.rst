@@ -47,8 +47,6 @@ This assumes elasticsearch is running on localhost using the default ports. You 
       "exists" : true, "_source" : {"foo":"bar"}
     }
    
-*TODO*: what index gets created? What ID? just auto-create this?
-
 Tests
 -----
 There are a couple of tests for this, though these are woefully incomplete. Run them with::
