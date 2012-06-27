@@ -8,7 +8,10 @@ It's available under the terms of the MIT license.
 Usage
 -----
 
-*Warning!* This is a Work in Progress. 
+*Warning!* This is a Work in Progress. At the moment, this is just an experiment. You probably don't want to use this for anything even remotely serious. If you need a real library for ElasticSearch, check out one of these:
+
+* `pyelasticsearch <https://github.com/rhec/pyelasticsearch>`_
+* `pyes <https://github.com/aparo/pyes>`_
 
 To get started, `download elasticsearch <http://www.elasticsearch.org/download/>`_, extract it, and run it locally::
 
