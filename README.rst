@@ -5,10 +5,11 @@ stores it's keys and values in ElasticSearch.
 
 *Warning!* This is a Work in Progress. At the moment, this is just an
 experiment. You probably don't want to use this for anything even remotely
-serious. If you need a real library for ElasticSearch, check out one of these:
+serious.
 
-* `pyelasticsearch <https://github.com/rhec/pyelasticsearch>`_
-* `pyes <https://github.com/aparo/pyes>`_
+If you need a *real* library for ElasticSearch, check out one of the
+`community-supported python clients <http://www.elasticsearch.org/guide/clients/>`_
+
 
 Usage
 -----
