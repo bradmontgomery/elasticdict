@@ -74,11 +74,7 @@ What Next?
 
 Look at the source; There's obviously not much here at the moment. Right now
 the `ElasticDict` class just persists data to Elasticsearch, but there's a lot
-more that could be done:
-
-* support for all of the `dict` methods (not everything works as expected)
-* Search! Elasticsearch is for... search. How should that fit into a
-  dictionary?
+more that could be done. See the ``TODO`` file for more info.
 
 Other ideas? Reach out on twitter (`@bkmontgomery <http://twitter.com/bkmontgomery>`_)
 or email me.
