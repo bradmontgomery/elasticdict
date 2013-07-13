@@ -9,17 +9,6 @@ class ElasticDict(dict):
 
     """
 
-    def _uri(self, key=''):
-        """A helper method to generate the REST API uris for elasticsearch."""
-        data = {
-            "host": self.es_host,
-            "port": self.es_port,
-            "index": self.es_index,
-            "type": self.es_type,
-            "id": key
-        }
-        return "http://{host}:{port}/{index}/{type}/{id}".format(**data)
-
     def __init__(self, es_host='localhost', es_port=9200,
                  es_index='elasticdict', es_type='data'):
 
@@ -35,6 +24,17 @@ class ElasticDict(dict):
             "index": self.es_index
         }
         requests.put("http://{host}:{port}/{index}".format(**index_data))
+
+    def _uri(self, key=''):
+        """A helper method to generate the REST API uris for elasticsearch."""
+        data = {
+            "host": self.es_host,
+            "port": self.es_port,
+            "index": self.es_index,
+            "type": self.es_type,
+            "id": key
+        }
+        return "http://{host}:{port}/{index}/{type}/{id}".format(**data)
 
     def _get_key_from_elasticsearch(self, key):
         """Get the data associated with the given key from elasticsearch.
