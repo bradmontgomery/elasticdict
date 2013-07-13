@@ -82,3 +82,17 @@ class ElasticDict(dict):
                 return self[key]
             else:
                 raise KeyError
+
+    def __delitem__(self, key):
+        """Delete a key from ElasticSearch, and then from the internal dict."""
+        # Delete from ElasticSearch, first.
+        uri = self._uri(key)
+        result = requests.delete(uri)
+        result = result.json()
+
+        # Raise a KeyError if this fails
+        if "ok" not in result or not result['ok']:
+            raise KeyError
+
+        # Finally, delete the key from the internal dictionary
+        return super(ElasticDict, self).__delitem__(key)
