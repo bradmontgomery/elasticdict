@@ -177,6 +177,43 @@ class TestElasticDict:
                 "http://localhost:9200/elasticdict/data/nothing"
             )
 
+    def test__query(self):
+        # create an object to use for an ES query response
+        es_response = {
+            '_shards': {'failed': 0, 'successful': 1, 'total': 1},
+            'hits': {
+                'hits': [{
+                    '_id': 'foo',
+                    '_index': 'elasticdict',
+                    '_score': 0.30685282,
+                    '_source': {'foo': 'bar'},
+                    '_type': 'data'
+                }],
+                'max_score': 0.30685282,
+                'total': 1,
+            },
+            'timed_out': False,
+            'took': 1
+        }
+
+        # Create a Mock response object
+        config = {
+            'status_code': 200,
+            'json.return_value': es_response,
+        }
+        mock_response = Mock(**config)
+        self.mock_requests.get.return_value = mock_response
+
+        d = ElasticDict()
+        results = d._query('bar')
+        eq_(results, [{u'foo': u'bar'}])
+
+        expected_query_json = ('{"query": {"filtered": {"query": '
+            '{"query_string": {"query": "bar"}}}}}')
+        self.mock_requests.get.assert_called_once_with(
+            'http://localhost:9200/elasticdict/data/_search',
+            data=expected_query_json
+        )
 
 #def simple_test():
 #    e = ElasticDict()

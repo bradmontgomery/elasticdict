@@ -96,3 +96,26 @@ class ElasticDict(dict):
 
         # Finally, delete the key from the internal dictionary
         return super(ElasticDict, self).__delitem__(key)
+
+    def _query(self, item):
+        """Simple ElasticSearch Query; it just searches for ``item``, returning
+        a list of results or an empty list ``None``."""
+        results = []
+        uri = self._uri("_search")
+        query = {
+            "query": {
+                "filtered": {
+                    "query": {
+                        "query_string": {
+                            "query": item
+                        }
+                    }
+                }
+            }
+        }
+        response = requests.get(uri, data=json.dumps(query))
+        if response.status_code == 200:
+            result = response.json()
+            if result['hits']['total'] > 0:
+                results = [d['_source'] for d in result['hits']['hits']]
+        return results
