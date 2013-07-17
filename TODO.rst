@@ -7,22 +7,15 @@ tests
     Aim for 100% coverage; Tests currently require a running instance of ES;
     Start using Mock, instead?
 
-search
-    support the ``key in d`` expression if ``d`` is an ``ElasticDict`` object.
-    This would essentially be a search, and if performed, would load ``key``'s
-    value into the dictionary.
-
 ``dict`` methods
     support sane operations for all of the expected ``dict`` methods (not
     everything works as expected):
 
-    * __delitem__
-    * __contains__ --- support for ``key in d`` expressions
-    * get
-    * items
+    * get -- should use the custom __getitem__
+    * items -- should load keys/values from ES
+    * keys -- should load keys from ES
+    * values -- should load values from ES
+    * update
     * iteritems
     * iterkeys
     * itervalues
-    * keys
-    * update
-    * values
