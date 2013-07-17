@@ -97,6 +97,19 @@ class ElasticDict(dict):
         # Finally, delete the key from the internal dictionary
         return super(ElasticDict, self).__delitem__(key)
 
+    def __contains__(self, item):
+        """Simple item lookup."""
+        # check the local dictionary first
+        found = super(ElasticDict, self).__contains__(item)
+        if not found:
+            try:
+                # Just access the item and store it in the local dictionary
+                result = self[item]
+                found = True
+            except KeyError:
+                found = False
+        return found
+
     def _query(self, item):
         """Simple ElasticSearch Query; it just searches for ``item``, returning
         a list of results or an empty list ``None``."""

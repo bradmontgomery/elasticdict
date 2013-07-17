@@ -6,7 +6,7 @@ Run the tests with::
 
 """
 from mock import Mock, patch
-from nose.tools import assert_raises, eq_
+from nose.tools import assert_raises, eq_, ok_
 
 from elasticdict import ElasticDict
 
@@ -176,6 +176,19 @@ class TestElasticDict:
             self.mock_requests.delete.assert_called_once_with(
                 "http://localhost:9200/elasticdict/data/nothing"
             )
+
+    def test__contains__(self):
+        # when the key exists in the dictionary
+        d = ElasticDict()
+        d['foo'] = 'bar'
+        ok_('foo' in d)
+
+        # when the key exists, but is pulled from ElasticSearch
+        d = ElasticDict()
+        d._get_key_from_elasticsearch = Mock(return_value={"fizz": "buzz"})
+        eq_(d.items(), [])
+        ok_("fizz" in d)
+        eq_(d.items(), [("fizz", "buzz")])
 
     def test__query(self):
         # create an object to use for an ES query response
